@@ -37,7 +37,7 @@ RUN chmod +x /etc/services.d/serf/run
 # Copy events handler scripts
 RUN mkdir /serf-handlers
 COPY scripts/member-join.sh /serf-handlers/member-join.sh
-COPY scripts/member-leave.sh /serf-handlers/member.leave.sh
+COPY scripts/member-leave.sh /serf-handlers/member-leave.sh
 RUN chmod +x /serf-handlers/*
 
 # Copy the haproxy and syslog config
@@ -51,7 +51,8 @@ COPY config/haproxy.cfg.hb /config/haproxy.cfg.hb
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# TODO: [CFG] Create the nodes folder
+# Create the nodes folder
+RUN mkdir /nodes
 
 # Expose the ports for Serf
 EXPOSE 7946 7373
